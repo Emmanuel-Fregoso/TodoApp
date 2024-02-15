@@ -9,12 +9,15 @@ import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     lateinit var etTitulo:EditText
     lateinit var etDesc:EditText
     lateinit var btnAgregar:Button
-    lateinit var lvTask:ListView
+    lateinit var listaTareas:RecyclerView
+    lateinit var adapter: TareasAdapter
     private val tareasViewModel:TareasViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,18 +27,20 @@ class MainActivity : AppCompatActivity() {
         etTitulo = findViewById(R.id.etTitulo)
         etDesc = findViewById(R.id.etDesc)
         btnAgregar = findViewById(R.id.btnAgregar)
-        lvTask = findViewById(R.id.lvTask)
+        listaTareas = findViewById(R.id.rvTareas)
 
-        val adaptador = ArrayAdapter(this,android.R.layout.simple_list_item_1,tareasViewModel.tareas)
-        lvTask.adapter = adaptador
+        adapter = TareasAdapter(tareasViewModel.tareas)
+        listaTareas.adapter = adapter
+        listaTareas.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
 
         btnAgregar.setOnClickListener {
             val titulo = etTitulo.text.toString()
             val desc = etDesc.text.toString()
             Toast.makeText(this, "Task added!", Toast.LENGTH_SHORT).show()
             Log.d("MainActivity", "$titulo: $desc") // Log -> Para debugear la app
-            tareasViewModel.tareas.add("$titulo: $desc")
-            adaptador.notifyDataSetChanged()
+            tareasViewModel.tareas.add(Tarea(titulo, desc,false))
+            adapter.notifyDataSetChanged()
+
 
         }
     }

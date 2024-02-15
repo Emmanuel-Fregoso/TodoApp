@@ -34,13 +34,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="32dp"
         android:text="Agregar" />
 
-    <ListView
-        android:id="@+id/lvTask"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTareas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="32dp" />
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp" />
 
 </LinearLayout>
