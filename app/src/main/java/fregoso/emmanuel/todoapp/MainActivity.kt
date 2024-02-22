@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
         btnAgregar.setOnClickListener {
             val titulo = etTitulo.text.toString()
             val desc = etDesc.text.toString()
-            Toast.makeText(this, "Task added!", Toast.LENGTH_SHORT).show()
-            Log.d("MainActivity", "$titulo: $desc") // Log -> Para debugear la app
             tareasViewModel.tareas.add(Tarea(titulo, desc,false))
             adapter.notifyDataSetChanged()
+            Toast.makeText(this, "Task added!", Toast.LENGTH_SHORT).show()
+            Log.d("MainActivity", "$titulo: $desc") // Log -> Para debugear la app
 
 
         }
